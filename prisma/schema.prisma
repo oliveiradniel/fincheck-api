@@ -14,7 +14,9 @@ model User {
   email    String @unique
   password String
 
-  bankAccounts BankAccount[]
+  bankAccounts           BankAccount[]
+  transaction_categories TransactionCategory[]
+  transactions           Transaction[]
 
   @@map("users")
 }
@@ -34,7 +36,47 @@ model BankAccount {
   type           BankAccountType
   color          String
 
+  transactions Transaction[]
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("bank_accounts")
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+
+  @@map("transaction_type")
+}
+
+model TransactionCategory {
+  id     String          @id @default(uuid()) @db.Uuid
+  userId String          @map("user_id") @db.Uuid
+  name   String
+  icon   String
+  type   TransactionType
+
+  transactions Transaction[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("transaction_categories")
+}
+
+model Transaction {
+  id                    String          @id @default(uuid()) @db.Uuid
+  userId                String          @map("user_id") @db.Uuid
+  bankAccountId         String          @map("bank_account_id") @db.Uuid
+  transactionCategoryId String?         @map("transaction_category_id") @db.Uuid
+  name                  String
+  value                 Float
+  date                  DateTime
+  type                  TransactionType
+
+  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  bankAccount         BankAccount          @relation(fields: [bankAccountId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  transactionCategory TransactionCategory? @relation(fields: [transactionCategoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  @@map("transactions")
 }
