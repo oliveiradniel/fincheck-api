@@ -40,7 +40,7 @@ export class UsersRepository {
     return user;
   }
 
-  async findByEmail(email: string, select: Prisma.UserSelect) {
+  async findByEmail(email: string, select?: Prisma.UserSelect) {
     const user = await this.prismService.user.findUnique({
       where: { email },
       select,
