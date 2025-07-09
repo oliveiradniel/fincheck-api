@@ -6,17 +6,16 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
 import { env } from 'src/shared/config/env';
-import { AuthGuard } from './auth.guard';
 
 @Module({
   imports: [
     JwtModule.register({
+      global: true,
       secret: env.jwtSecret,
       signOptions: { expiresIn: '1d' },
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, AuthGuard],
-  exports: [JwtModule, AuthGuard],
+  providers: [AuthService],
 })
 export class AuthModule {}
