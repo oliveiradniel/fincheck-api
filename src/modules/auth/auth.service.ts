@@ -11,8 +11,8 @@ import { compare, hash } from 'bcryptjs';
 
 import { UsersRepository } from 'src/shared/database/repositories/users.repositories';
 
-import { AuthenticateDTO } from './dto/authenticate.dto';
-import { SignupDTO } from './dto/signup.dto';
+import { SignInDTO } from './dto/signin.dto';
+import { SignUpDTO } from './dto/signup.dto';
 
 @Injectable()
 export class AuthService {
@@ -21,8 +21,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async authenticate(authDTO: AuthenticateDTO) {
-    const { email, password } = authDTO;
+  async signin(signinDTO: SignInDTO) {
+    const { email, password } = signinDTO;
 
     const user = await this.usersRepo.findByEmail(email, {
       id: true,
@@ -37,13 +37,12 @@ export class AuthService {
       throw new BadRequestException('Invalid credentials.');
     }
 
-    const payload = { sub: user.id };
-    const accessToken = await this.jwtService.signAsync(payload);
+    const accessToken = this.generateAccessToken(user.id);
 
     return { accessToken };
   }
 
-  async signup(signupDTO: SignupDTO) {
+  async signup(signupDTO: SignUpDTO) {
     const { name, email, password } = signupDTO;
 
     const SALT = 10;
@@ -60,6 +59,12 @@ export class AuthService {
       data: { name, email, password: hashedPassword },
     });
 
-    return registeredUser;
+    const accessToken = this.generateAccessToken(registeredUser.id);
+
+    return { accessToken };
+  }
+
+  private generateAccessToken(userId: string) {
+    return this.jwtService.signAsync({ sub: userId });
   }
 }
