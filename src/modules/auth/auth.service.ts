@@ -37,7 +37,7 @@ export class AuthService {
       throw new BadRequestException('Invalid credentials.');
     }
 
-    const accessToken = this.generateAccessToken(user.id);
+    const accessToken = await this.generateAccessToken(user.id);
 
     return { accessToken };
   }

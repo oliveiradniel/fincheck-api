@@ -40,6 +40,15 @@ export class UsersRepository {
     return user;
   }
 
+  async findById(id: string) {
+    const user = await this.prismService.user.findUnique({
+      where: { id },
+      select: { id: true, name: true, email: true },
+    });
+
+    return user;
+  }
+
   async findByEmail(email: string, select?: Prisma.UserSelect) {
     const user = await this.prismService.user.findUnique({
       where: { email },

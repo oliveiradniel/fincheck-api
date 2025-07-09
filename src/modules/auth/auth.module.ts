@@ -6,6 +6,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
 import { env } from 'src/shared/config/env';
+import { AuthGuard } from './auth.guard';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { env } from 'src/shared/config/env';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
+  exports: [JwtModule, AuthGuard],
 })
 export class AuthModule {}
