@@ -11,7 +11,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 
-import { BankAccountsService } from './bank-accounts.service';
+import { BankAccountsService } from './services/bank-accounts.service';
 
 import { CreateBankAccountDTO } from './dto/create-bank-account.dto';
 import { UpdateBankAccountDTO } from './dto/update-bank-account.dto';

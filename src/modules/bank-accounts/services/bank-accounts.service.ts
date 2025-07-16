@@ -1,13 +1,18 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import { BankAccountsRepository } from 'src/shared/database/repositories/bank-accounts.repositories';
 
-import { CreateBankAccountDTO } from './dto/create-bank-account.dto';
-import { UpdateBankAccountDTO } from './dto/update-bank-account.dto';
+import { ValidateBankAccountOwnershipService } from './validate-bank-account-ownership.service';
+
+import { CreateBankAccountDTO } from '../dto/create-bank-account.dto';
+import { UpdateBankAccountDTO } from '../dto/update-bank-account.dto';
 
 @Injectable()
 export class BankAccountsService {
-  constructor(private readonly bankAccountsRepo: BankAccountsRepository) {}
+  constructor(
+    private readonly bankAccountsRepo: BankAccountsRepository,
+    private readonly validateBankAccountOwnershipService: ValidateBankAccountOwnershipService,
+  ) {}
 
   findAllByUserId(userId: string) {
     return this.bankAccountsRepo.findAllByUserId(userId);
@@ -30,7 +35,10 @@ export class BankAccountsService {
     bankAccountId: string,
     updateBankAccountDTO: UpdateBankAccountDTO,
   ) {
-    await this.validateBankAccountOwnership(userId, bankAccountId);
+    await this.validateBankAccountOwnershipService.validate(
+      userId,
+      bankAccountId,
+    );
 
     const { color, initialBalance, name, type } = updateBankAccountDTO;
 
@@ -47,24 +55,13 @@ export class BankAccountsService {
   }
 
   async remove(userId: string, bankAccountId: string) {
-    await this.validateBankAccountOwnership(userId, bankAccountId);
-
-    await this.bankAccountsRepo.remove(userId, bankAccountId);
-
-    return null;
-  }
-
-  private async validateBankAccountOwnership(
-    userId: string,
-    bankAccountId: string,
-  ) {
-    const isOwner = await this.bankAccountsRepo.findByUserIdAndBankAccountId(
+    await this.validateBankAccountOwnershipService.validate(
       userId,
       bankAccountId,
     );
 
-    if (!isOwner) {
-      throw new NotFoundException('Bank account not found.');
-    }
+    await this.bankAccountsRepo.remove(userId, bankAccountId);
+
+    return null;
   }
 }

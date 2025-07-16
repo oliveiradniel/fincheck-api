@@ -8,6 +8,12 @@ import { UpdateBankAccountDTO } from './dto/update-bank-account.dto';
 export class BankAccountsRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
+  findById(bankAccountId: string) {
+    return this.prismaService.bankAccount.findUnique({
+      where: { id: bankAccountId },
+    });
+  }
+
   findAllByUserId(userId: string) {
     return this.prismaService.bankAccount.findMany({
       where: { userId },
