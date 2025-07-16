@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { TransactionCategoriesModule } from './modules/transaction-categories/transaction-categories.module';
 
 import { AuthGuard } from './modules/auth/auth.guard';
+import { BankAccountsModule } from './modules/bank-accounts/bank-accounts.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AuthGuard } from './modules/auth/auth.guard';
     TransactionCategoriesModule,
     DatabaseModule,
     AuthModule,
+    BankAccountsModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: AuthGuard }],

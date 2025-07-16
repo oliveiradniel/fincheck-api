@@ -56,10 +56,12 @@ export class AuthService {
     const hashedPassword = await hash(password, SALT);
 
     const registeredUser = await this.usersRepo.create({
-      data: { name, email, password: hashedPassword },
+      name,
+      email,
+      password: hashedPassword,
     });
 
-    const accessToken = this.generateAccessToken(registeredUser.id);
+    const accessToken = await this.generateAccessToken(registeredUser.id);
 
     return { accessToken };
   }

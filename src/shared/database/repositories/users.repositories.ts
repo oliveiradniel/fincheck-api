@@ -7,10 +7,10 @@ import { PrismaService } from '../prisma.service';
 export class UsersRepository {
   constructor(private readonly prismService: PrismaService) {}
 
-  async create({ data }: Prisma.UserCreateArgs) {
-    const user = await this.prismService.user.create({
+  create(userDTO: Prisma.UserUncheckedCreateInput) {
+    return this.prismService.user.create({
       data: {
-        ...data,
+        ...userDTO,
         transaction_categories: {
           createMany: {
             data: [
@@ -36,25 +36,19 @@ export class UsersRepository {
         },
       },
     });
-
-    return user;
   }
 
-  async findById(id: string) {
-    const user = await this.prismService.user.findUnique({
+  findById(id: string) {
+    return this.prismService.user.findUnique({
       where: { id },
       select: { name: true, email: true },
     });
-
-    return user;
   }
 
-  async findByEmail(email: string, select?: Prisma.UserSelect) {
-    const user = await this.prismService.user.findUnique({
+  findByEmail(email: string, select?: Prisma.UserSelect) {
+    return this.prismService.user.findUnique({
       where: { email },
       select,
     });
-
-    return user;
   }
 }

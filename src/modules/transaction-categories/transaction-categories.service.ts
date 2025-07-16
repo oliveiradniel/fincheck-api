@@ -10,17 +10,11 @@ export class TransactionCategoriesService {
     private readonly transactionCategoriesRepo: TransactionCategoriesRepository,
   ) {}
 
-  async findAllByUserId(userId: string) {
-    const transactionCategoriesList =
-      await this.transactionCategoriesRepo.findAllByUserId(userId);
-
-    return transactionCategoriesList;
+  findAllByUserId(userId: string) {
+    return this.transactionCategoriesRepo.findAllByUserId(userId);
   }
 
-  async create(createTransactionCategoryDTO: CreateTransactionCategoryDTO) {
-    const createdTransactionCategory =
-      await this.transactionCategoriesRepo.create(createTransactionCategoryDTO);
-
-    return createdTransactionCategory;
+  create(createTransactionCategoryDTO: CreateTransactionCategoryDTO) {
+    return this.transactionCategoriesRepo.create(createTransactionCategoryDTO);
   }
 }

@@ -7,19 +7,17 @@ import { PrismaService } from '../prisma.service';
 export class TransactionCategoriesRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async findAllByUserId(userId: string) {
-    const categories = await this.prismaService.transactionCategory.findMany({
+  findAllByUserId(userId: string) {
+    return this.prismaService.transactionCategory.findMany({
       where: { userId },
     });
-
-    return categories;
   }
 
-  async create(category: Prisma.TransactionCategoryCreateInput) {
-    const createdCategory = await this.prismaService.transactionCategory.create(
-      { data: category },
-    );
-
-    return createdCategory;
+  create(
+    transactionCategoryDTO: Prisma.TransactionCategoryUncheckedCreateInput,
+  ) {
+    return this.prismaService.transactionCategory.create({
+      data: transactionCategoryDTO,
+    });
   }
 }
