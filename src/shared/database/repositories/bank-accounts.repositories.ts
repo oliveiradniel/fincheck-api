@@ -2,17 +2,12 @@ import { Injectable } from '@nestjs/common';
 
 import { type Prisma } from 'generated/prisma';
 import { PrismaService } from '../prisma.service';
+
 import { UpdateBankAccountDTO } from './dto/update-bank-account.dto';
 
 @Injectable()
 export class BankAccountsRepository {
   constructor(private readonly prismaService: PrismaService) {}
-
-  findById(bankAccountId: string) {
-    return this.prismaService.bankAccount.findUnique({
-      where: { id: bankAccountId },
-    });
-  }
 
   findAllByUserId(userId: string) {
     return this.prismaService.bankAccount.findMany({
