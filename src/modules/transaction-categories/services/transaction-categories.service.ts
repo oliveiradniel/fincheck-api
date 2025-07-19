@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { TransactionCategoriesRepository } from 'src/shared/database/repositories/transaction-categories.repositories';
 
-import { CreateTransactionCategoryDTO } from './dto/create-transaction-category.dto';
+import { CreateTransactionCategoryDTO } from '../dto/create-transaction-category.dto';
 
 @Injectable()
 export class TransactionCategoriesService {

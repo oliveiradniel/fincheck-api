@@ -2,7 +2,8 @@ import { Controller, Get, Post, Body } from '@nestjs/common';
 
 import { CreateTransactionCategoryDTO } from './dto/create-transaction-category.dto';
 
-import { TransactionCategoriesService } from './transaction-categories.service';
+import { TransactionCategoriesService } from './services/transaction-categories.service';
+
 import { ActiveUserId } from 'src/shared/decorators/ActiveUserId';
 
 @Controller('transaction-categories')

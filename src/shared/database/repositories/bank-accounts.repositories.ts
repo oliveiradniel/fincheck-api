@@ -17,7 +17,7 @@ export class BankAccountsRepository {
 
   findByUserIdAndBankAccountId(userId: string, bankAccountId: string) {
     return this.prismaService.bankAccount.findFirst({
-      where: { userId, id: bankAccountId },
+      where: { id: bankAccountId, userId },
     });
   }
 

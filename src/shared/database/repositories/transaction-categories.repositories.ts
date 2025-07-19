@@ -13,6 +13,15 @@ export class TransactionCategoriesRepository {
     });
   }
 
+  findByUserIdAndTransactionCategoryId(
+    userId: string,
+    transactionCategoryId: string,
+  ) {
+    return this.prismaService.transactionCategory.findFirst({
+      where: { id: transactionCategoryId, userId },
+    });
+  }
+
   create(
     transactionCategoryDTO: Prisma.TransactionCategoryUncheckedCreateInput,
   ) {
