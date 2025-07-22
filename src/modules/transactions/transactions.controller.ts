@@ -9,6 +9,8 @@ import {
   ParseUUIDPipe,
   HttpCode,
   HttpStatus,
+  Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 
 import { TransactionsService } from './services/transactions.service';
@@ -23,8 +25,12 @@ export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
 
   @Get()
-  findAll(@ActiveUserId() userId: string) {
-    return this.transactionsService.findAll(userId);
+  findAll(
+    @ActiveUserId() userId: string,
+    @Query('month', ParseIntPipe) month: number,
+    @Query('year', ParseIntPipe) year: number,
+  ) {
+    return this.transactionsService.findAll(userId, { month, year });
   }
 
   @Post()

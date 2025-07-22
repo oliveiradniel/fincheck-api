@@ -18,8 +18,8 @@ export class TransactionsService {
     private readonly validateTransactionOwnershipService: ValidateTransactionOwnershipService,
   ) {}
 
-  findAll(userId: string) {
-    return this.transactionsRepo.findAllByUserId(userId);
+  findAll(userId: string, filters: { month: number; year: number }) {
+    return this.transactionsRepo.findAllByUserId(userId, filters);
   }
 
   async create(userId: string, createTransactionDTO: CreateTransactionDTO) {
