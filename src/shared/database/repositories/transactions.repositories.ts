@@ -5,19 +5,23 @@ import { PrismaService } from '../prisma.service';
 
 import { UpdateTransactionDTO } from './dto/update-transaction.dto';
 
+import { Filters } from './entities/Filters';
+
 @Injectable()
 export class TransactionsRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  findAllByUserId(userId: string, filters: { month: number; year: number }) {
-    const { year, month } = filters;
+  findAllByUserId(userId: string, filters: Filters) {
+    const { year, month, bankAccountId, type } = filters;
 
     return this.prismaService.transaction.findMany({
       where: {
         userId,
+        bankAccountId,
+        type,
         date: {
           gte: new Date(Date.UTC(year, month)),
-          lt: new Date(Date.UTC(year, month) + 1),
+          lt: new Date(Date.UTC(year, month + 1)),
         },
       },
     });

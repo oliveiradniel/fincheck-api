@@ -4,10 +4,12 @@ import { TransactionsRepository } from 'src/shared/database/repositories/transac
 
 import { ValidateBankAccountOwnershipService } from 'src/modules/bank-accounts/services/validate-bank-account-ownership.service';
 import { ValidateTransactionCategoryOwnershipService } from 'src/modules/transaction-categories/services/validate-transaction-category-ownership.service';
+import { ValidateTransactionOwnershipService } from './validate-transaction-ownership.service';
 
 import { CreateTransactionDTO } from '../dto/create-transaction.dto';
 import { UpdateTransactionDTO } from '../dto/update-transaction.dto';
-import { ValidateTransactionOwnershipService } from './validate-transaction-ownership.service';
+
+import { Filters } from 'src/shared/database/repositories/entities/Filters';
 
 @Injectable()
 export class TransactionsService {
@@ -18,7 +20,7 @@ export class TransactionsService {
     private readonly validateTransactionOwnershipService: ValidateTransactionOwnershipService,
   ) {}
 
-  findAll(userId: string, filters: { month: number; year: number }) {
+  findAll(userId: string, filters: Filters) {
     return this.transactionsRepo.findAllByUserId(userId, filters);
   }
 
