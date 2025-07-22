@@ -28,9 +28,6 @@ export class UsersRepository {
               { name: 'Roupas', icon: 'clothes', type: 'EXPENSE' },
               { name: 'Transporte', icon: 'transport', type: 'EXPENSE' },
               { name: 'Viagem', icon: 'travel', type: 'EXPENSE' },
-
-              // Other
-              { name: 'Outro', icon: 'other', type: 'INCOME' },
             ],
           },
         },
