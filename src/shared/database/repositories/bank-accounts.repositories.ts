@@ -12,6 +12,14 @@ export class BankAccountsRepository {
   findAllByUserId(userId: string) {
     return this.prismaService.bankAccount.findMany({
       where: { userId },
+      include: {
+        transactions: {
+          select: {
+            type: true,
+            value: true,
+          },
+        },
+      },
     });
   }
 
