@@ -16,7 +16,7 @@ export class ValidateTransactionCategoryOwnershipService {
       );
 
     if (!isOwner) {
-      throw new NotFoundException('Transaction category not found');
+      throw new NotFoundException('Transaction category not found.');
     }
   }
 }

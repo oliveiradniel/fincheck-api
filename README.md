@@ -1,98 +1,144 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 💰 Fincheck API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+API REST desenvolvida com **NestJS + Prisma** para gerenciamento financeiro pessoal.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Com ela, você pode:
 
-## Description
+- Criar e autenticar usuários.
+- Cadastrar contas bancárias.
+- Registrar e listar transações financeiras.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## 🚀 Tecnologias
+
+- [NestJS](https://nestjs.com) - Framework Node.js moderno e escalável.
+- [Prisma ORM](https://www.prisma.io/) - Mapeamento de modelos para banco de dados e criação de migrações para melhor manutenção.
+- [PostgreSQL](https://postgresql.org/) - Banco de dados relacional (padrão).
+- [JWT](https://jwt.io/) - Autenticação de usuários.
+- [Swagger](https://swagger.io/) - Documentação automática da API.
+
+---
+
+## 📦 Instalação
+
+1. Clone o repositório e abra o projeto:
 
 ```bash
-$ yarn install
+git clone https://github.com/oliveiradniel/fincheck-api.git
+cd fincheck-api
 ```
 
-## Compile and run the project
+2. Instale as dependências:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+npm install
 ```
 
-## Run tests
+ou
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+yarn
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+3. Copie o arquivo de variáveis de ambiente:
 
 ```bash
-$ yarn install -g @nestjs/mau
-$ mau deploy
+cp .env.example .env
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+> Dica: adicione `.env` ao `.gitignore` para evitar versionamento de dados sensíveis.
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📄 Variáveis de Ambiente
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+O projeto utiliza um arquivo ".env" com as seguintes variáveis:
 
-## Support
+| Nome           | Descrição                             | Exemplo                                                            |
+| -------------- | ------------------------------------- | ------------------------------------------------------------------ |
+| `DATABASE_URL` | URL de conexão com o banco PostgreSQL | `postgresql://user:password@localhost:5432/database?schema=public` |
+| `JWT_SECRET`   | Chave usada para assinar tokens JWT   | `unsecure_jwt_secret`                                              |
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+> ⚠️ A variável `JWT_SECRET` não pode ser **"unsecure_jwt_secret"**, pois será rejeitada.
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 🐳 Usando PostgreSQL com Docker
 
-## License
+Esta aplicação usa PostgreSQL via Docker.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Se você ainda não tem um banco local configurado, basta subir um container com o seguinte comando:
+
+```bash
+docker run --name fincheck-db -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
+```
+
+> O `POSTGRES_USER` e o `POSTGRES_PASSWORD` devem corresponder a string de conexão (DSN) informada no arquivo que contém as variáveis de ambiente.
+
+1. Inicie o container:
+
+```bash
+docker start fincheck-db
+```
+
+2. Acesse o bash do container:
+
+```bash
+docker exec -it fincheck-db bash
+```
+
+3. Acesse o PostgreSQL:
+
+```bash
+psql -U root
+```
+
+4. Crie o banco de dados:
+
+```bash
+CREATE DATABASE database;
+```
+
+> O nome do banco deve bater com o que estiver em `DATABASE_URL`.
+
+---
+
+## 📤 Prisma e Migrações
+
+Após configurar o banco, gere os arquivos do Prisma e rode as migrações:
+
+```bash
+npx prisma migrate
+npx prisma migrate dev
+```
+
+---
+
+## 🔐 Autenticação
+
+A API utiliza autenticação via JWT.
+
+Após fazer login, envie o token no header das requisições protegidas:
+
+```bash
+http
+
+Authorization: Bearer <seu-token>
+```
+
+---
+
+## 📚 Documentação da API
+
+Acesse a documentação interativa com Swagger:
+
+```bash
+GET /docs
+```
+
+---
+
+## 🔗 Links
+
+[![portfolio](https://img.shields.io/badge/meu_portfólio-00A6F4?style=for-the-badge&logo=reactquery&logoColor=white)](https://jovemprogramador.dev/)

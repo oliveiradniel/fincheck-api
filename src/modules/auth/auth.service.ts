@@ -2,7 +2,7 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
-  UnauthorizedException,
+  NotFoundException,
 } from '@nestjs/common';
 
 import { JwtService } from '@nestjs/jwt';
@@ -29,7 +29,7 @@ export class AuthService {
       password: true,
     });
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials.');
+      throw new NotFoundException('Invalid credentials.');
     }
 
     const isPasswordValid = await compare(password, user.password);

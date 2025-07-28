@@ -13,7 +13,7 @@ export class ValidateTransactionOwnershipService {
     );
 
     if (!isOwner) {
-      throw new NotFoundException('Transaction not found');
+      throw new NotFoundException('Transaction not found.');
     }
   }
 }
