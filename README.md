@@ -25,7 +25,7 @@ Com ela, você pode:
 1. Clone o repositório e abra o projeto:
 
 ```bash
-git clone https://github.com/oliveiradniel/fincheck-api.git
+git clone
 cd fincheck-api
 ```
 
@@ -112,6 +112,20 @@ Após configurar o banco, gere os arquivos do Prisma e rode as migrações:
 npx prisma migrate
 npx prisma migrate dev
 ```
+
+---
+
+## 💻 Como iniciar a aplicação em modo de desenvolvimento
+
+```bash
+$ yarn start:dev
+```
+
+> Certifique-se de que as variáveis de ambiente e o banco de dados estão configurados corretamente antes de iniciar o projeto.
+
+⚠️ Importante: não esqueça de alterar o valor da variável de ambiente **JWT_SECRET**.
+
+O valor atual é apenas um placeholder e será rejeitado. Defina uma chave secreta válida e segura para que a aplicação funcione corretamente.
 
 ---
 
