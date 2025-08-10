@@ -25,7 +25,7 @@ Com ela, você pode:
 1. Clone o repositório e abra o projeto:
 
 ```bash
-git clone
+git clone https://github.com/oliveiradniel/fincheck-api.git
 cd fincheck-api
 ```
 
