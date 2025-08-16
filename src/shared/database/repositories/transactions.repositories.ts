@@ -24,6 +24,15 @@ export class TransactionsRepository {
           lt: new Date(Date.UTC(year, month + 1)),
         },
       },
+      include: {
+        transactionCategory: {
+          select: {
+            id: true,
+            name: true,
+            icon: true,
+          },
+        },
+      },
     });
   }
 
